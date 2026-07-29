@@ -23,7 +23,10 @@ function submitExpense(name, amount) {
     //console.log(`Total Expense: ${totalExpense}`);
 }
 function displayExpense() {
-    let dataexpense = '<ul class="list-group w-100">';
+    let dataexpense = `<ul class="list-group w-100"> <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>Pengeluaran</strong></span>
+                <span><strong>Jumlah</strong></span>
+            </li>`;
     let expenses = JSON.parse(localStorage.getItem("expense")) || [];
     for (const exlist of expenses) {
         dataexpense += `
