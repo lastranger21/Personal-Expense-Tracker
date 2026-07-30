@@ -6,7 +6,12 @@ let expense = [{
     expenseAmount: 250000,
 }]
 
-localStorage.setItem('expense', JSON.stringify(expense));
+//localStorage.setItem('expense', JSON.stringify(expense));
+if (!localStorage.getItem('expense')) {
+    localStorage.setItem('expense', JSON.stringify(expense));
+}else{
+    expense = JSON.parse(localStorage.getItem('expense'));
+}
 console.log(localStorage.getItem('expense'));
 let totalExpense = JSON.parse(localStorage.getItem("expense")).reduce((sum, item) => sum + item.expenseAmount, 0);
 
@@ -16,10 +21,12 @@ function addExpense(pengeluaran) {
 
 function submitExpense(name, amount) {
     //expense.push({name,amount});
-    addExpense(amount);
+    
     let currentExpense = JSON.parse(localStorage.getItem("expense")) || [];
     currentExpense.push({ expenseName: name, expenseAmount: amount });
     localStorage.setItem("expense", JSON.stringify(currentExpense));
+    addExpense(amount);
+    totalExpense = JSON.parse(localStorage.getItem("expense")).reduce((sum, item) => sum + item.expenseAmount, 0);
     //console.log(`Total Expense: ${totalExpense}`);
 }
 function displayExpense() {
